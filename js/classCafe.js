@@ -35,9 +35,6 @@ class Cafe {
       const index = i - k * this.presentWorkers.length;
       table.service = this.presentWorkers[index].name; // добавляет официанта к столику
       this.presentWorkers[index].tables.push({ id: table.table });
-
-      console.log(index, k);
-
       return table;
     });
     //  метод распределяет столики между присутствующими официантами
