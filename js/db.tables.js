@@ -1,34 +1,36 @@
 const tables = [
   {
     table: 1,
-    service: "",
+    service: '',
   },
   {
     table: 2,
-    service: "",
+    service: '',
   },
   {
     table: 3,
-    service: "",
+    service: '',
   },
   {
     table: 4,
-    service: "",
+    service: '',
   },
   {
     table: 5,
-    service: "",
+    service: '',
   },
   {
     table: 6,
-    service: "",
+    service: '',
   },
   {
     table: 7,
-    service: "",
+    service: '',
   },
   {
     table: 8,
-    service: "",
+    service: '',
   },
 ];
+
+export default tables;
