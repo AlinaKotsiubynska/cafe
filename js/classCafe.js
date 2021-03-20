@@ -27,15 +27,14 @@ class Cafe {
     let k = 0;
     this.tables = this.tables.map((table, i) => {
       if (
-        i > this.presentWorkers.length - 1 &&
-        i / k > this.presentWorkers.length - 1
+        i >= this.presentWorkers.length - 1 &&
+        i / (k+1) >= this.presentWorkers.length
       ) {
         k++;
       }
       const index = i - k * this.presentWorkers.length;
-      table.service = this.presentWorkers[index];
-      console.log(index, k);
-
+      table.service = this.presentWorkers[index].name; // добавляет официанта к столику
+      this.presentWorkers[index].tables.push({ id: table.table });
       return table;
     });
     //  метод распределяет столики между присутствующими официантами
@@ -46,4 +45,4 @@ class Cafe {
 const cafe = new Cafe({ workers, menu, tables });
 console.log(cafe.setupTables());
 console.log(cafe.tables);
-console.log(cafe.presentWorkers);
+console.table(cafe.presentWorkers);
