@@ -1,39 +1,40 @@
 const oficiants = [
   {
-    name: "Ann",
+    name: 'Ann',
     isPresent: true,
     tables: [],
     tips: 0,
   },
   {
-    name: "Nick",
+    name: 'Nick',
     isPresent: false,
     tables: [],
     tips: 0,
   },
   {
-    name: "Carrol",
+    name: 'Carrol',
     isPresent: true,
     tables: [],
     tips: 0,
   },
   {
-    name: "Jack",
+    name: 'Jack',
     isPresent: false,
     tables: [],
     tips: 0,
   },
   {
-    name: "Berry",
+    name: 'Berry',
     isPresent: false,
     tables: [],
     tips: 0,
   },
   {
-    name: "Jim",
+    name: 'Jim',
     isPresent: true,
     tables: [],
     tips: 0,
   },
 ];
 
+export default oficiants;
