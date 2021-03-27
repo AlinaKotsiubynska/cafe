@@ -1,6 +1,6 @@
-import workers from './db.workers.js';
-import tables from './db.tables.js';
-import menu from './db.menu.js';
+import workers from "./db.workers.js";
+import tables from "./db.tables.js";
+import menu from "./db.menu.js";
 
 class Cafe {
   constructor({ workers, tables, menu }) {
@@ -28,7 +28,7 @@ class Cafe {
     const { presentWorkers } = this;
     const workerCount = presentWorkers.length;
     let currentWorker = 0;
-    this.tables.forEach(table => {
+    this.tables.forEach((table) => {
       if (currentWorker >= workerCount) {
         currentWorker = 0;
       }
@@ -37,31 +37,44 @@ class Cafe {
       currentWorker += 1;
     });
   }
-}
-  // setupTables() {
-  //   this.getPresentWorkers();
-  //   let k = 0;  // 27-35 прописівает логику распределения столов среди официантов
-  //   this.tables = this.tables.map((table, i) => {
-  //     if (
-  //       i >= this.presentWorkers.length - 1 &&
-  //       i / (k+1) >= this.presentWorkers.length
-  //     ) {
-  //       k++;
-  //     }
-  //     const index = i - k * this.presentWorkers.length;
-  //     table.service = this.presentWorkers[index].name; // здобавляет закрепленного официанта this.presentWorkers[index] в объект стола[i]
-  //     this.presentWorkers[index].tables.push({ id: table.table }); // добавляет стол в свойство tables официанта 
-  //     return table;
-  //   });
-    //  метод распределяет столики между присутствующими официантами
-    //  добавляяет официантам в столики, которые за ними закреплены
-    //  и добавляет столику оффицианта, который его обслуживает
 
+  addOrder(currentTable, dishId, num) {
+    const table = this.tables.find(({ table }) => table === currentTable);
+    if (!table.order) {
+      table.order = { [dishId]: num };
+      return;
+    }
+    if (!table.order[dishId]) {
+      table.order[dishId] = num;
+      return;
+    }
+    table.order[dishId] += num;
+  }
+  // getOrder(table, dishId, num) {
+  //   this.tables.find((currentTable) => currentTable.table === table);
+  // }
+}
+// setupTables() {
+//   this.getPresentWorkers();
+//   let k = 0;  // 27-35 прописівает логику распределения столов среди официантов
+//   this.tables = this.tables.map((table, i) => {
+//     if (
+//       i >= this.presentWorkers.length - 1 &&
+//       i / (k+1) >= this.presentWorkers.length
+//     ) {
+//       k++;
+//     }
+//     const index = i - k * this.presentWorkers.length;
+//     table.service = this.presentWorkers[index].name; // здобавляет закрепленного официанта this.presentWorkers[index] в объект стола[i]
+//     this.presentWorkers[index].tables.push({ id: table.table }); // добавляет стол в свойство tables официанта
+//     return table;
+//   });
+//  метод распределяет столики между присутствующими официантами
+//  добавляяет официантам в столики, которые за ними закреплены
+//  и добавляет столику оффицианта, который его обслуживает
 
 {
-  workers,
-  tables,
-  menu
+  workers, tables, menu;
 }
 
 // const { t, m, w } = setObj
@@ -69,4 +82,8 @@ const cafe = new Cafe({ workers, menu, tables });
 console.log(cafe.setupTables());
 console.log(cafe.tables);
 console.table(cafe.presentWorkers);
-
+cafe.addOrder(7, "espresso", 5);
+cafe.addOrder(7, "napoleon", 5);
+cafe.addOrder(7, "napoleon", 10);
+cafe.addOrder(7, "espresso", 5);
+console.log(cafe.tables);
