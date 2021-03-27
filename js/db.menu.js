@@ -1,42 +1,42 @@
 const menu = [
   {
-    id: 'capuchino',
-    name: 'Капучино',
+    id: "capuchino",
+    name: "Капучино",
     price: 45,
   },
   {
-    id: 'late',
-    name: 'Лате',
+    id: "late",
+    name: "Лате",
     price: 40,
   },
   {
-    id: 'napoleon',
-    name: 'Торт Наполеон',
+    id: "napoleon",
+    name: "Торт Наполеон",
     price: 75,
   },
   {
-    id: 'water-0.5',
-    name: 'Вода без газа 0,5',
+    id: "water-0.5",
+    name: "Вода без газа 0,5",
     price: 20,
   },
   {
-    id: 'zavarnoe',
-    name: 'Пирожное Заварное',
+    id: "zavarnoe",
+    name: "Пирожное Заварное",
     price: 38,
   },
   {
-    id: 'espresso',
-    name: 'Еспрессо',
+    id: "espresso",
+    name: "Еспрессо",
     price: 30,
   },
   {
-    id: 'marcepan',
-    name: 'Марцепан',
+    id: "marcepan",
+    name: "Марцепан",
     price: 45,
   },
   {
-    id: 'fresh-orang-0.3',
-    name: 'Фреш Апельсиновый 0,3',
+    id: "fresh-orang-0.3",
+    name: "Фреш Апельсиновый 0,3",
     price: 45,
   },
 ];
