@@ -70,7 +70,6 @@ class Cafe {
   setOrder(tableNum) {
     const table = this.findTable(tableNum);
     const { order } = table;
-    console.log(order);
     if (!order) return
     table.preparing = Object.entries(order).map(([name, num]) => {
       const dish = this.menu.find(({ id }) => id === name);
@@ -79,19 +78,6 @@ class Cafe {
   }
 }
 
-
-
 const cafe = new Cafe({ workers, menu, tables });
-console.log(cafe.setupTables());
-console.log(cafe.tables);
-console.table(cafe.presentWorkers);
-cafe.addOrder(7, "espresso", 5);
-cafe.addOrder(7, "napoleon", 5);
-cafe.addOrder(7, "napoleon", 10);
-cafe.addOrder(7, "espresso", 5);
-// cafe.removeDish(7, "espresso", 100)
-// cafe.removeOrder(7)
-cafe.setOrder(7)
-console.log(cafe.tables[6]);
 
 export default cafe;
