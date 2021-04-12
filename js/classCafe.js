@@ -80,6 +80,7 @@ class Cafe {
 }
 
 
+
 const cafe = new Cafe({ workers, menu, tables });
 console.log(cafe.setupTables());
 console.log(cafe.tables);
@@ -92,3 +93,5 @@ cafe.addOrder(7, "espresso", 5);
 // cafe.removeOrder(7)
 cafe.setOrder(7)
 console.log(cafe.tables[6]);
+
+export default cafe;
