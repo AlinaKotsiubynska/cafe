@@ -1,13 +1,12 @@
 import cafe from './classCafe.js';
 import menuTmp from '../hbs/menu-form.hbs';
-console.log(cafe);
-console.log();
+import preparingListTmp from '../hbs/preparingList.hbs';
 
 class ClassRender {
   static refs = {
     body: document.querySelector('body'),
     form: document.createElement('form'),
-    list: document.createElement('ul'),
+    prepList: document.createElement('ul'),
     // openMenuBtn:  document.createElement('button'),
   };
 
@@ -33,15 +32,10 @@ class ClassRender {
     const { body } = ClassRender.refs;
 
     const markupMenu = menuTmp({ items: cafe.menu, table: tableNum });
-
     body.insertAdjacentHTML('afterbegin', markupMenu);
-
     const form = document.getElementById(`table-${tableNum}`);
-
     const list = form.querySelector('ul');
-
     list.addEventListener('click', this.handlerAddDish);
-
     form.addEventListener('submit', this.handlerSubmitOrder);
   };
 
@@ -51,12 +45,9 @@ class ClassRender {
     }
 
     const liRef = evt.target.parentNode;
-
     const input = liRef.querySelector('input');
-
     const id = liRef.id;
     const value = Number(input.value);
-
     cafe.addOrder(this.tableNum, id, value);
     console.log(cafe.tables[this.tableNum - 1].order);
   };
@@ -64,15 +55,53 @@ class ClassRender {
   handlerSubmitOrder = evt => {
     evt.preventDefault();
 
-    cafe.setOrder(this.tableNum);
-
-    console.log(cafe.tables[this.tableNum - 1]);
+    const tableNum = evt.currentTarget.id;
+    const tableId = tableNum.split('-').pop();
+    const currentTable = cafe.findTable(Number(tableId));
+    cafe.setOrder(Number(tableId));
+    const isPrep = currentTable.isPrep;
+    this.renderPreparedList({ tableNum: tableId, isPrep });
     evt.currentTarget.remove();
+  };
+
+  renderPreparedList = ({ tableNum, isPrep }) => {
+    const prepListMarkUp = preparingListTmp({
+      tableNum,
+      isPrep: isPrep ? 'Уже готово' : 'Готовится',
+    });
+    let prepList = document.getElementById('prep-list');
+    if (!prepList) {
+      prepList = ClassRender.refs.prepList;
+      prepList.setAttribute('id', 'prep-list');
+      prepList.setAttribute('style', 'position: absolute; top: 0; left: 0');
+      ClassRender.refs.body.insertAdjacentElement('afterbegin', prepList);
+    }
+    let isStart = true;
+    if (prepList.querySelectorAll('li').length > 0) {
+      prepList.querySelectorAll('li').forEach(({ dataset: { id } }) => {
+        if (id === tableNum) {
+          isStart = false;
+        }
+      });
+    }
+    if (isStart) {
+      prepList.insertAdjacentHTML('afterbegin', prepListMarkUp);
+    }
+    setTimeout(() => {
+      const item = prepList.querySelector(`[data-id="${tableNum}"]`);
+      if (item) {
+        cafe.removeOrder(Number(tableNum));
+        item.children[1].textContent = !isPrep ? 'Уже готово' : 'Готовится';
+        setTimeout(() => {
+          item.remove();
+        }, 2000);
+      }
+    }, 2000);
   };
 }
 
 const render = new ClassRender();
-console.log(render);
 
 // render.renderMenuList(cafe.menu)
 render.renderOpenMenuBtn();
+console.log('cafe.tables :>> ', cafe.tables);
