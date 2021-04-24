@@ -1,0 +1,14 @@
+<form id="table-{{table}}">
+    <ul>
+
+        {{#each items }}
+        <li id={{this.id}}>
+            <p>{{this.name}}</p>
+            <input type="text" value="1" />
+            <button type="button">Add</button>
+        </li>
+        {{/each }}
+
+    </ul>
+    <button type="submit"> Отправить заказ </button>
+</form>
