@@ -55,31 +55,31 @@ class ClassRender {
   handlerSubmitOrder = evt => {
     evt.preventDefault();
 
-    const tableNum = evt.currentTarget.id;
-    const tableId = tableNum.split('-').pop();
-    const currentTable = cafe.findTable(Number(tableId));
-    cafe.setOrder(Number(tableId));
+    const tableId = evt.currentTarget.id;
+    const tableNum= tableId.split('-').pop();
+    const currentTable = cafe.findTable(tableNum);
+    cafe.setOrder(tableNum);
     const isPrep = currentTable.isPrep;
-    this.renderPreparedList({ tableNum: tableId, isPrep });
+    this.renderPreparedList({ tableId, isPrep, tableNum });
     evt.currentTarget.remove();
   };
 
-  renderPreparedList = ({ tableNum, isPrep }) => {
+  renderPreparedList = ({ tableId, isPrep, tableNum }) => {
     const prepListMarkUp = preparingListTmp({
       tableNum,
       isPrep: isPrep ? 'Уже готово' : 'Готовится',
     });
-    let prepList = document.getElementById('prep-list');
-    if (!prepList) {
-      prepList = ClassRender.refs.prepList;
-      prepList.setAttribute('id', 'prep-list');
-      prepList.setAttribute('style', 'position: absolute; top: 0; left: 0');
-      ClassRender.refs.body.insertAdjacentElement('afterbegin', prepList);
-    }
-    let isStart = true;
+    console.log(tableId);
+    const prepList = this.makingPrepListElement()
+    this.checkIsCooking(tableId, prepList, prepListMarkUp)
+    this.cookingInProgress(tableNum, prepList, isPrep)
+  };
+
+  checkIsCooking = (tableId, prepList, prepListMarkUp) => {
+        let isStart = true;
     if (prepList.querySelectorAll('li').length > 0) {
       prepList.querySelectorAll('li').forEach(({ dataset: { id } }) => {
-        if (id === tableNum) {
+        if (id === tableId) {
           isStart = false;
         }
       });
@@ -87,17 +87,35 @@ class ClassRender {
     if (isStart) {
       prepList.insertAdjacentHTML('afterbegin', prepListMarkUp);
     }
+  }
+  makingPrepListElement = () => {
+    let prepList = document.getElementById('prep-list');
+    console.log(prepList);
+    if (!prepList) {
+      prepList = ClassRender.refs.prepList;
+      prepList.setAttribute('id', 'prep-list');
+      prepList.setAttribute('style', 'position: absolute; top: 0; left: 0');
+      ClassRender.refs.body.insertAdjacentElement('afterbegin', prepList);
+      console.log(prepList);
+    }
+    return prepList
+  }
+  cookingInProgress = (tableNum, prepList, isPrep) => {
     setTimeout(() => {
+          console.log('setTime');
       const item = prepList.querySelector(`[data-id="${tableNum}"]`);
+      console.log(prepList);
+      console.log(item);
+      console.log(tableNum);
       if (item) {
-        cafe.removeOrder(Number(tableNum));
+        cafe.removeOrder(tableNum);
         item.children[1].textContent = !isPrep ? 'Уже готово' : 'Готовится';
         setTimeout(() => {
           item.remove();
         }, 2000);
       }
     }, 2000);
-  };
+  }
 }
 
 const render = new ClassRender();

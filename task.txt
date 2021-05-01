@@ -55,3 +55,10 @@ Done✅
 7. Написать функцию которая проверяет изменился ли totalCheck столика и если это произошло то в объекте столика:
 - удаляются все свойства кроме {table: 1, service: "", totalCheck: ""} 
 - добавляэтся свойство isFree: true
+
+
+
+---- добавить блюду свойсто "время приготовления" и использовать в cookingInProgress()
+
+
+-adds Number() to findTable(), brakes renderPreparedList() into methods makingPrepListElement, cookingInProgress, checkIsCooking

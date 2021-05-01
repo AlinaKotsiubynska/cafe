@@ -38,7 +38,7 @@ class Cafe {
   }
 
   findTable(currentTable) {
-    return this.tables.find(({ table }) => table === currentTable);
+    return this.tables.find(({ table }) => table === Number(currentTable));
   }
   addOrder(currentTable, dishId, num) {
     const table = this.findTable(currentTable);
