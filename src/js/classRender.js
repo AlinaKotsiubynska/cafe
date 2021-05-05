@@ -7,7 +7,6 @@ class ClassRender {
     body: document.querySelector('body'),
     form: document.createElement('form'),
     prepList: document.createElement('ul'),
-    // openMenuBtn:  document.createElement('button'),
   };
 
   constructor() {
@@ -54,13 +53,10 @@ class ClassRender {
 
   handlerSubmitOrder = evt => {
     evt.preventDefault();
-
-    const tableNum = evt.currentTarget.id;
-    const tableId = tableNum.split('-').pop();
+    const tableId = evt.currentTarget.id.split('-').pop();
     const currentTable = cafe.findTable(Number(tableId));
     cafe.setOrder(Number(tableId));
-    const isPrep = currentTable.isPrep;
-    this.renderPreparedList({ tableNum: tableId, isPrep });
+    this.renderPreparedList({ tableNum: tableId, isPrep: currentTable.isPrep });
     evt.currentTarget.remove();
   };
 
@@ -76,32 +72,26 @@ class ClassRender {
       prepList.setAttribute('style', 'position: absolute; top: 0; left: 0');
       ClassRender.refs.body.insertAdjacentElement('afterbegin', prepList);
     }
-    let isStart = true;
-    if (prepList.querySelectorAll('li').length > 0) {
-      prepList.querySelectorAll('li').forEach(({ dataset: { id } }) => {
-        if (id === tableNum) {
-          isStart = false;
-        }
-      });
-    }
+    const isStart = prepList.querySelector(`[data-id="${tableNum}"]`)
+      ? false
+      : true;
+
     if (isStart) {
       prepList.insertAdjacentHTML('afterbegin', prepListMarkUp);
     }
-    setTimeout(() => {
-      const item = prepList.querySelector(`[data-id="${tableNum}"]`);
-      if (item) {
-        cafe.removeOrder(Number(tableNum));
-        item.children[1].textContent = !isPrep ? 'Уже готово' : 'Готовится';
-        setTimeout(() => {
-          item.remove();
-        }, 2000);
-      }
-    }, 2000);
+    // setTimeout(() => {
+    //   const item = prepList.querySelector(`[data-id="${tableNum}"]`);
+    //   if (item) {
+    //     cafe.removeOrder(Number(tableNum));
+    //     item.children[1].textContent = !isPrep ? 'Уже готово' : 'Готовится';
+    //     setTimeout(() => {
+    //       item.remove();
+    //     }, 2000);
+    //   }
+    // }, 2000);
   };
 }
 
 const render = new ClassRender();
 
-// render.renderMenuList(cafe.menu)
 render.renderOpenMenuBtn();
-console.log('cafe.tables :>> ', cafe.tables);
