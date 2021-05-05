@@ -1,8 +1,10 @@
 import cafe from './classCafe.js';
 import menuTmp from '../hbs/menu-form.hbs';
 import preparingListTmp from '../hbs/preparingList.hbs';
+import workersListModal from '../hbs/workersListModal.hbs';
+import { getWorkers, updateWorker } from './serviceApi.js';
 
-class ClassRender {
+export class ClassRender {
   static refs = {
     body: document.querySelector('body'),
     form: document.createElement('form'),
@@ -79,19 +81,31 @@ class ClassRender {
     if (isStart) {
       prepList.insertAdjacentHTML('afterbegin', prepListMarkUp);
     }
-    // setTimeout(() => {
-    //   const item = prepList.querySelector(`[data-id="${tableNum}"]`);
-    //   if (item) {
-    //     cafe.removeOrder(Number(tableNum));
-    //     item.children[1].textContent = !isPrep ? 'Уже готово' : 'Готовится';
-    //     setTimeout(() => {
-    //       item.remove();
-    //     }, 2000);
-    //   }
-    // }, 2000);
+  };
+
+  renderWorkersList = workersList => {
+    const markup = workersListModal(workersList);
+    const list = document.createElement('ul');
+    list.setAttribute('id', 'workers-list');
+    ClassRender.refs.body.append(list);
+    list.innerHTML = markup;
+  };
+
+  upgradeWorkerList = (workersList) => {
+    const markup = workersListModal(workersList);
+    document.getElementById("workers-list").innerHTML = markup;
+  };
+
+  handleInputChecked = e => {
+    const { name, value, checked } = e.target;
+    updateWorker(Number(value), { isPresent: checked }).then(() =>
+      getWorkers().then(workers => this.upgradeWorkerList(workers)),
+    );
   };
 }
 
 const render = new ClassRender();
 
-render.renderOpenMenuBtn();
+export default render;
+
+// render.renderOpenMenuBtn();

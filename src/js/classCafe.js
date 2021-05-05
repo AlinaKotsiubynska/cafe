@@ -76,6 +76,11 @@ class Cafe {
     });
     table.isPrep = false;
   }
+
+  updateWorkerStatus = (id) => {
+    const upWorker = this.workers.find(worker => worker.id === id);
+    upWorker.isPresent = !upWorker.isPresent;
+  }
 }
 
 const cafe = new Cafe({ workers, menu, tables });

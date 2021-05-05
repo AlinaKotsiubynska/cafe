@@ -1,0 +1,12 @@
+{{#each this}}
+<li>
+    <label>
+        <span>{{this.name}}</span>
+        {{#if this.isPresent}}
+        <input type="checkbox" name="workers" value={{this.id}} checked>
+        {{else}}
+        <input type="checkbox" name="workers" value={{this.id}}>
+        {{/if}}
+    </label>
+</li>
+{{/each}}

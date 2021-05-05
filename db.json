@@ -45,7 +45,7 @@
     {
       "id": 1,
       "name": "Ann",
-      "isPresent": true,
+      "isPresent": false,
       "tables": [],
       "tips": 0
     },
@@ -59,7 +59,7 @@
     {
       "id": 3,
       "name": "Carrol",
-      "isPresent": true,
+      "isPresent": false,
       "tables": [],
       "tips": 0
     },
@@ -80,7 +80,7 @@
     {
       "id": 6,
       "name": "Jim",
-      "isPresent": true,
+      "isPresent": false,
       "tables": [],
       "tips": 0
     }
