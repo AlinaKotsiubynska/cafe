@@ -15,52 +15,10 @@ export class ClassRender {
     this.tableNum = 1;
   }
 
-  renderOpenMenuBtn() {
-    const list = document.createElement('ul');
-    cafe.tables.forEach(({ table }) => {
-      const button = `<li><button type="button">${table}</button></li>`;
-      list.insertAdjacentHTML('beforeend', button);
-    });
-    ClassRender.refs.body.insertAdjacentElement('afterbegin', list);
 
-    list.addEventListener('click', evt => {
-      if (evt.target.nodeName !== 'BUTTON') return;
-      this.tableNum = Number(evt.target.textContent);
-      this.renderMenuList(evt.target.textContent);
-    });
-  }
-  renderMenuList = tableNum => {
-    const { body } = ClassRender.refs;
 
-    const markupMenu = menuTmp({ items: cafe.menu, table: tableNum });
-    body.insertAdjacentHTML('afterbegin', markupMenu);
-    const form = document.getElementById(`table-${tableNum}`);
-    const list = form.querySelector('ul');
-    list.addEventListener('click', this.handlerAddDish);
-    form.addEventListener('submit', this.handlerSubmitOrder);
-  };
 
-  handlerAddDish = evt => {
-    if (evt.target.nodeName !== 'BUTTON') {
-      return;
-    }
-
-    const liRef = evt.target.parentNode;
-    const input = liRef.querySelector('input');
-    const id = liRef.id;
-    const value = Number(input.value);
-    cafe.addOrder(this.tableNum, id, value);
-    console.log(cafe.tables[this.tableNum - 1].order);
-  };
-
-  handlerSubmitOrder = evt => {
-    evt.preventDefault();
-    const tableId = evt.currentTarget.id.split('-').pop();
-    const currentTable = cafe.findTable(Number(tableId));
-    cafe.setOrder(Number(tableId));
-    this.renderPreparedList({ tableNum: tableId, isPrep: currentTable.isPrep });
-    evt.currentTarget.remove();
-  };
+  
 
   renderPreparedList = ({ tableNum, isPrep }) => {
     const prepListMarkUp = preparingListTmp({

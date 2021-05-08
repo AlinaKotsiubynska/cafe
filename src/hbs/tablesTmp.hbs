@@ -1,0 +1,9 @@
+<ul id={{id}}>
+  {{#each tables}}
+  <li data-id={{this.id}}>
+    <span>Стол №{{this.table}}</span>
+    <button type="button" data-order={{this.id}}>Заказ</button>
+    <button type="button" data-bill={{this.id}}>Оплата</button>
+  </li>
+  {{/each}}
+</ul>

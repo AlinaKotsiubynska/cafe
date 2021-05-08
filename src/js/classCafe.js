@@ -2,6 +2,8 @@ import workers from './db.workers.js';
 import tables from './db.tables.js';
 import menu from './db.menu.js';
 
+
+
 class Cafe {
   constructor({ workers, tables, menu }) {
     this.workers = workers;
@@ -38,10 +40,11 @@ class Cafe {
   }
 
   findTable(currentTable) {
-    return this.tables.find(({ table }) => table === currentTable);
+    return this.tables.find(({ table }) => table === Number(currentTable));
   }
   addOrder(currentTable, dishId, num) {
     const table = this.findTable(currentTable);
+    console.log(currentTable, table);
     if (!table.order) {
       table.order = { [dishId]: num };
       return;
@@ -67,8 +70,10 @@ class Cafe {
   }
 
   setOrder(tableNum) {
+    console.log(tableNum);
     const table = this.findTable(tableNum);
     const { order } = table;
+    console.log(order);
     if (!order) return;
     table.preparing = Object.entries(order).map(([name, num]) => {
       const dish = this.menu.find(({ id }) => id === name);
@@ -83,6 +88,6 @@ class Cafe {
   }
 }
 
-const cafe = new Cafe({ workers, menu, tables });
 
-export default cafe;
+
+export default Cafe;
