@@ -83,23 +83,38 @@ export class ClassRender {
     }
   };
 
+  addRefWithId = (refName, tag, id) => {
+    ClassRender.refs[refName] = document.createElement(tag);
+    ClassRender.refs[refName].setAttribute('id', id);
+  };
+
+  get refs() {
+    return ClassRender.refs;
+  }
+
+  renderMarkup = (markup, node) => {
+    node.innerHTML = markup;
+  };
+
   renderWorkersList = workersList => {
     const markup = workersListModal(workersList);
-    const list = document.createElement('ul');
-    list.setAttribute('id', 'workers-list');
-    ClassRender.refs.body.append(list);
+    this.addRefWithId('list', 'ul', 'workers-list');
+    const list = this.refs.list;
+    this.refs.body.append(list);
     list.innerHTML = markup;
   };
 
-  upgradeWorkerList = (workersList) => {
+  upgradeWorkerList = workersList => {
     const markup = workersListModal(workersList);
-    document.getElementById("workers-list").innerHTML = markup;
+    this.refs.list.innerHTML = markup;
   };
 
   handleInputChecked = e => {
     const { name, value, checked } = e.target;
+    const { list } = this.refs;
+    const checkedItem = list.querySelectorAll('input')[+value - 1];
     updateWorker(Number(value), { isPresent: checked }).then(() =>
-      getWorkers().then(workers => this.upgradeWorkerList(workers)),
+      checkedItem.setAttribute('checked', ''),
     );
   };
 }
