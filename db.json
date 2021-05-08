@@ -1,0 +1,130 @@
+{
+  "tables": [
+    {
+      "id": 1,
+      "table": 1,
+      "service": ""
+    },
+    {
+      "id": 2,
+      "table": 2,
+      "service": ""
+    },
+    {
+      "id": 3,
+      "table": 3,
+      "service": ""
+    },
+    {
+      "id": 4,
+      "table": 4,
+      "service": ""
+    },
+    {
+      "id": 5,
+      "table": 5,
+      "service": ""
+    },
+    {
+      "id": 6,
+      "table": 6,
+      "service": ""
+    },
+    {
+      "id": 7,
+      "table": 7,
+      "service": ""
+    },
+    {
+      "id": 8,
+      "table": 8,
+      "service": ""
+    }
+  ],
+  "workers": [
+    {
+      "id": 1,
+      "name": "Ann",
+      "isPresent": true,
+      "tables": [],
+      "tips": 0
+    },
+    {
+      "id": 2,
+      "name": "Nick",
+      "isPresent": false,
+      "tables": [],
+      "tips": 0
+    },
+    {
+      "id": 3,
+      "name": "Carrol",
+      "isPresent": true,
+      "tables": [],
+      "tips": 0
+    },
+    {
+      "id": 4,
+      "name": "Jack",
+      "isPresent": false,
+      "tables": [],
+      "tips": 0
+    },
+    {
+      "id": 5,
+      "name": "Berry",
+      "isPresent": true,
+      "tables": [],
+      "tips": 0
+    },
+    {
+      "id": 6,
+      "name": "Jim",
+      "isPresent": false,
+      "tables": [],
+      "tips": 0
+    }
+  ],
+  "menu": [
+    {
+      "id": "capuchino",
+      "name": "Капучино",
+      "price": 45
+    },
+    {
+      "id": "late",
+      "name": "Лате",
+      "price": 40
+    },
+    {
+      "id": "napoleon",
+      "name": "Торт Наполеон",
+      "price": 75
+    },
+    {
+      "id": "water-0.5",
+      "name": "Вода без газа 0,5",
+      "price": 20
+    },
+    {
+      "id": "zavarnoe",
+      "name": "Пирожное Заварное",
+      "price": 38
+    },
+    {
+      "id": "espresso",
+      "name": "Еспрессо",
+      "price": 30
+    },
+    {
+      "id": "marcepan",
+      "name": "Марцепан",
+      "price": 45
+    },
+    {
+      "id": "fresh-orang-0.3",
+      "name": "Фреш Апельсиновый 0,3",
+      "price": 45
+    }
+  ]
+}
