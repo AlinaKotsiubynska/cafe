@@ -15,11 +15,6 @@ export class ClassRender {
     this.tableNum = 1;
   }
 
-
-
-
-  
-
   renderPreparedList = ({ tableNum, isPrep }) => {
     const prepListMarkUp = preparingListTmp({
       tableNum,

@@ -126,5 +126,18 @@
       "name": "Фреш Апельсиновый 0,3",
       "price": 45
     }
+  ],
+  "users": [
+    {
+      "id": "admin",
+      "login": "admin",
+      "password": "admin",
+      "status": "admin"
+    },
+    {
+      "id": "qwe",
+      "login": "Jack",
+      "password": "qwe"
+    }
   ]
 }

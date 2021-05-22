@@ -18,7 +18,7 @@ class Cafe {
       tables: [],
       tips: 0,
     };
-    this.workers = [...this.workers, newWorker];
+    this.workers = [...this.workers, newWorker]; // post request
   }
   getPresentWorkers() {
     this.presentWorkers = this.workers.filter(({ isPresent }) => isPresent);

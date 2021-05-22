@@ -18,3 +18,23 @@ body {
    */
   background-image: url('./images/bg-pattern.png');
 }
+
+.list {
+  list-style: none;
+  width: 100%;
+  padding: 25px;
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+  /* grid-template-rows: ; */
+  grid-gap: 15px;
+}
+
+.list li {
+  background-color: green;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
